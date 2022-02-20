@@ -1,1 +1,170 @@
-ahoj
+using System;
+using System.Collections.Generic;
+using System.Collections;
+
+namespace MyApp 
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Skola sk = new Skola();
+            Student st1 = new Student();
+            Student st2 = new Student();
+            st1.Jmeno = "Jachym";
+            st1.Prijimeni = "Vrátil";
+            st1.Predmet = "A";
+            st1.Predmet1 = "B";
+            st1.Predmet2 = "C";
+            st1.Znamka = 1;
+            st1.Znamka1 = 2;
+            st1.Znamka2 = 3;
+
+            st2.Jmeno = "Emma";
+            st2.Prijimeni = "Smetana";
+            st2.Predmet = "B";
+            st2.Predmet1 = "C";
+            st2.Predmet2 = "D";
+            st2.Znamka = 4;
+            st2.Znamka1 = 2;
+            st2.Znamka2 = 1;
+
+
+
+            sk.PridejStudenta(st1);
+            sk.PridejStudenta(st2);
+
+            foreach (string x in sk.VseOSteudentech())
+            {
+                Console.WriteLine(x);
+            }
+
+            Console.WriteLine("Pocet studentu: " + sk.PocetStudentu());
+
+            Console.WriteLine("Pouze jeden student:");
+            foreach(Student x in sk.PouzeJedenStudent("Jachym Vrátil"))
+            {
+                Console.WriteLine(x);
+            }
+
+
+            Console.WriteLine("*****");
+
+
+            Console.WriteLine("Minimalisticky vypis WIP");
+            Console.WriteLine(sk.MinimalistickyVypis());
+            Console.ReadLine();
+        }
+    }
+
+    public class Skola
+    {
+        List<Student> seznamStudentu = new List<Student>();
+
+        public void PridejStudenta(Student student)
+        {
+            seznamStudentu.Add(student);
+        }
+
+        public string[] VseOSteudentech()
+        {
+            string[] vrat = new string[seznamStudentu.Count];
+            for (int i = 0; i < seznamStudentu.Count; i++)
+            {
+                vrat[i] = seznamStudentu[i].ToString();
+            }
+            return vrat;
+        }
+
+        public int PocetStudentu()
+        {
+
+            return seznamStudentu.Count();
+        }
+
+        public List<Student> PouzeJedenStudent(string JmenoaPrijmeniStudenta)
+        {
+            List<Student> navrat = new List<Student>();
+            foreach(Student student in seznamStudentu)
+            {
+                if($"{student.Jmeno} {student.Prijimeni}" == JmenoaPrijmeniStudenta)
+                {
+                    navrat.Add(student);
+                }
+            }
+            return navrat;
+        }
+
+        public string MinimalistickyVypis()
+        {
+            List<Student> navrat = new List<Student>();
+            int prumer = 0;
+
+
+            return "ahoj";
+
+        }
+
+        public int VypocetPrumeru(int zn1, int zn2, int zn3)
+        {
+            List<Student> xd = new List<Student>();
+
+            int prumer = 0;
+
+            
+
+
+
+
+            return prumer;
+        }
+    }
+
+    public class Student
+    {
+        public string Jmeno
+        {
+            get; set;
+        }
+
+        public string Prijimeni
+        {
+            get; set;
+        }
+
+        public string Predmet
+        {
+            get; set;
+        }
+
+        public string Predmet1
+        {
+            get; set;
+        }
+
+        public string Predmet2
+        {
+            get; set;
+        }
+
+        public int Znamka
+        {
+            get;set;
+        }
+
+        public int Znamka1
+        {
+            get;set;
+        }
+
+        public int Znamka2
+        {
+            get;set;
+        }
+
+        public override string ToString()
+        {
+            return $"Student: {Jmeno} {Prijimeni} jejich predmety: {Predmet} {Predmet1} {Predmet2} a nasledne znamky: {Znamka} {Znamka1} {Znamka2}";
+        }
+    }
+}
