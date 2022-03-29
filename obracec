@@ -1,0 +1,102 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace nactiaobrat
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("nacitani csv");
+            string nazevSouboru = "data.csv";
+            SeznamDat seznamDat1 = new SeznamDat();
+            seznamDat1.nactiCSV(nazevSouboru);
+            Console.WriteLine("uspesne nacteno csv");
+            Console.WriteLine("csv pred serazenim");
+            Console.WriteLine(seznamDat1.vratDataTextove());
+            
+
+
+            Console.WriteLine("konec");
+            Console.ReadKey();
+        }
+    }
+
+    public class Data
+    {
+        private string data;
+        private string id;
+
+        public Data()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        
+
+        public Data(string id, string data)
+        {
+            this.id = id;
+            this.data = data;
+        }
+
+        public Data(string student)
+        {
+            string[] elementy = student.Split(";");
+            this.id = elementy[0];
+            this.data = elementy[1];
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {id} data: {data}";
+        }
+
+    }
+
+    public class SeznamDat
+    {
+        private List<Data> seznam;
+
+        public SeznamDat()
+        {
+            seznam = new List<Data>();
+        }
+
+        public void nactiCSV(string navezSouboru)
+        {
+            string[] radky = System.IO.File.ReadAllLines(navezSouboru);
+            Data data;
+            for (int i = 1; i < radky.Length; i++)
+            {
+                 data = new Data(radky[i]);
+                seznam.Add(data);
+                
+            }
+            
+        }
+
+       
+
+        public override string ToString()
+        {
+            string ret = string.Empty;
+                 
+            foreach (Data data in seznam)
+            {
+                ret += data.ToString() + Environment.NewLine;
+            }
+            return ret;
+        }
+
+        public string vratDataTextove()
+        {
+            return ToString();
+        }
+
+        
+    }
+}
